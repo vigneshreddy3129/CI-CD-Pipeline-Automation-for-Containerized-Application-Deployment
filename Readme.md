@@ -26,6 +26,7 @@ Developer → GitHub
           (Tomcat)
               ↓
         Web Application
+```
 🛠️ Tools & Technologies Used
 Linux (Ubuntu)
 
@@ -42,16 +43,17 @@ Docker
 Apache Tomcat (Dockerized)
 
 📂 Project Structure
-text
+```text
 Copy code
 jenkins-docker-tomcat-ci-cd/
 ├── README.md
-├── Jenkinsfile (optional)
+├── Jenkinsfile 
 ├── pom.xml
 ├── src/
 │   └── main/
 │       └── webapp/
 └── screenshots/
+```
 🔧 Prerequisites
 One Linux server (Ubuntu 20.04 / 22.04)
 
@@ -61,34 +63,39 @@ Internet connectivity
 
 🔹 Step-by-Step Setup (Linux Commands)
 STEP 1️⃣ Update System
-bash
+```text
 Copy code
 sudo apt update -y
 sudo apt upgrade -y
+```
 STEP 2️⃣ Install Java
-bash
+```text
 Copy code
 sudo apt install openjdk-11-jdk -y
 java -version
+```
 STEP 3️⃣ Install Docker
-bash
+```text
 Copy code
 sudo apt install docker.io -y
 sudo systemctl start docker
 sudo systemctl enable docker
+```
 Add current user to Docker group:
 
-bash
+```text
 Copy code
 sudo usermod -aG docker $USER
 newgrp docker
+```
 Verify Docker:
 
-bash
+```text
 Copy code
 docker run hello-world
+```
 STEP 4️⃣ Install Jenkins
-bash
+```text
 Copy code
 curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
@@ -99,109 +106,117 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 
 sudo apt update -y
 sudo apt install jenkins -y
+```
 Start Jenkins:
 
-bash
+```text
 Copy code
 sudo systemctl start jenkins
 sudo systemctl enable jenkins
+```
 Access Jenkins:
 
-text
+```text
 Copy code
 http://SERVER_IP:8080
+```
 Get admin password:
 
-bash
+```text
 Copy code
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
 STEP 5️⃣ Install Maven
-bash
+```text
 Copy code
 sudo apt install maven -y
 mvn -version
+```
 STEP 6️⃣ Install Git
-bash
+```text
 Copy code
 sudo apt install git -y
 git --version
+```
 STEP 7️⃣ Run Tomcat Using Docker
-bash
+```text
 Copy code
 docker pull tomcat:9.0
+```
 Run Tomcat container:
 
-bash
+```text
 Copy code
 docker run -d \
 --name tomcat \
 -p 8081:8080 \
 tomcat:9.0
+```
 Verify:
 
-bash
-Copy code
+```text
 docker ps
+```
 Access Tomcat:
 
-text
-Copy code
+```text
 http://SERVER_IP:8081
+```
 ⚙️ Jenkins Job Configuration
-Job Type
-Freestyle Project
+# Job Type
+-  Freestyle Project
 
-Source Code Management
-Git Repository URL
+# Source Code Management
+- it Repository URL
 
-Build Step – Maven
-bash
-Copy code
+# Build Step – Maven
+```text
 mvn clean package
-Deploy WAR to Tomcat (Docker)
-bash
-Copy code
+```
+# Deploy WAR to Tomcat (Docker)
+```text
 docker cp target/*.war tomcat:/usr/local/tomcat/webapps/
 docker restart tomcat
+```
 🌐 Application Access
-text
-Copy code
+```text
 http://SERVER_IP:8081/<application-name>
+```
 🔄 CI/CD Workflow Summary
-Developer pushes code to GitHub
+- Developer pushes code to GitHub
 
-Jenkins pulls source code
+- Jenkins pulls source code
 
-Maven builds WAR file
+- Maven builds WAR file
 
-WAR is deployed to Tomcat Docker container
+- WAR is deployed to Tomcat Docker container
 
-Application is live
+- Application is live
 
 📌 Key DevOps Concepts Demonstrated
-CI/CD Pipeline Automation
+- CI/CD Pipeline Automation
 
-Jenkins Build Automation
+- Jenkins Build Automation
 
-Docker Containerization
+- Docker Containerization
 
-Tomcat Application Deployment
+- Tomcat Application Deployment
 
-Single Server DevOps Architecture
+- Single Server DevOps Architecture
 
 🧠 Interview Explanation (Short)
 This project implements a CI/CD pipeline using Jenkins to automate the build and deployment of a Java application. Maven handles packaging, Docker provides containerization, and Apache Tomcat runs the application, all hosted on a single Linux server.
 
 ✅ Future Enhancements
-Jenkins Pipeline (Jenkinsfile)
+- Jenkins Pipeline (Jenkinsfile)
 
-Dockerfile for custom image
+- Dockerfile for custom image
 
-GitHub Webhook integration
+- GitHub Webhook integration
 
-Blue-Green deployment
+- Blue-Green deployment
 
-Multi-server architecture
+- Multi-server architecture
 
 📎 Author
 Vignesh Reddy
